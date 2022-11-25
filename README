@@ -1,0 +1,54 @@
+read9660
+========
+
+read9660 reads an ISO-9660 image and dumps down the file system layout.
+As for now it supports pure ISO-9660 only (no Joliet).
+
+Currently this program is in early development stage and it has got very limited
+number of functions.
+
+
+Features:
+
+- Supports both 2048 and 2352 bytes/block images.
+- Supports CD-ROM XA extension.
+- Tries to find the file system even on images extracted from the 2nd or 
+  later track of the disc (such as CD-EXTRA).
+    - Well, it 'tries', and sometimes it may fail unfortunately...
+
+
+Usage:
+
+> read9660 <iso-file>
+
+This dumps the file system and prints every file's first logical block address
+(in sectors) and its size (in bytes), along with some other informations.
+
+
+Flag Field Information:
+
+File Flags [HDAXM--+]
+H - hidden
+D - directory
+A - is an Associated File
+X - has extended attribute record
+M - owner/group set in extended attribute record
++ - more entries for this file
+
+CD-ROM XA Mode 2 attributes [rwx-rwx-rwx12iad]
+rwx-rwx-rwx - owner/group/world read/(write)/execute permission
+1 - contains Form 1 sectors
+2 - contains Form 2 sectors
+i - contains interleaved sectors
+a - CD-DA file
+d - directory file
+
+
+To do:
+
+- verbosity control
+- 'extract' mode
+- interleaved file support
+- (hopefully) Joliet support
+
+
